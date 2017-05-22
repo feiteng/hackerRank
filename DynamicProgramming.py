@@ -9,4 +9,15 @@ def The_Coin_Change_Problem():
     print(ways[n])
 
 
-The_Coin_Change_Problem()
+
+def The_Longest_Common_Subsequence():
+    n, m = map(int, input().split())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+
+
+
+def Equal():
+
+
+Equal()
