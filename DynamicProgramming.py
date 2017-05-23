@@ -9,12 +9,6 @@ def The_Coin_Change_Problem():
     print(ways[n])
 
 
-def The_Longest_Common_Subsequence():
-    n, m = map(int, input().split())
-    A = list(map(int, input().split()))
-    B = list(map(int, input().split()))
-
-
 def Equal():
     for _ in range(int(input())):
         q = input()
@@ -107,16 +101,67 @@ def Sam_and_substrings():
     count = 0
     factor = 1
     k = 1
-    for i in range(len(s)-1,-1,-1):
+    for i in range(len(s) - 1, -1, -1):
         n = int(s[i])
-        count += n * (i+1) * factor % 1000000007
-        factor = (factor*10+1) % 1000000007
+        count += n * (i + 1) * factor % 1000000007
+        factor = (factor * 10 + 1) % 1000000007
     print(count % 1000000007)
 
 
+def Abbreviation():
+    import collections
+    for _ in range(int(input())):
+        a = input()
+        b = input()
+        aCap = [ai for ai in a if ai < 'a']
+        fal = False
+        c1 = collections.Counter(aCap)
+        c2 = collections.Counter(b)
+        for c in c1.keys():
+            if c not in c2 or c1[c] > c2[c]:
+                fal = True
+        # for c in c2.keys():
+        #     if c not in c1 or c2[c] > c1[c]:
+        #         fal = True
+        a = a.upper()
+        if fal:
+            print("NO")
+        else:
+            lcslen = AbbreviationLCS(b, a, len(b) - 1, len(a) - 1)
+            if lcslen == len(b):
+                print("YES")
+            else:
+                print("NO")
+
+
+def AbbreviationLCS(a, b, i, j):
+    lcs = [[0 for x in range(j + 1)] for y in range(i + 1)]
+    run = 0
+    while i >= 0 and j >= 0:
+        if a[i] == b[j]:
+            run += 1
+            lcs[i][j] += run
+            i -= 1
+            j -= 1
+        else:
+            j -= 1
+    return run
+    # if i < 0 or j < 0: return 0
+    # if a[i] == b[j]: return 1 + AbbreviationLCS(a, b, i - 1, j - 1)
+    # return AbbreviationLCS(a, b, i - 1, j)
+
+
+def The_Longest_Common_Subsequence():
+    n, m = map(int, input().split())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+
+
 import time
+
 t = time.time()
 
-Sam_and_substrings()
+Abbreviation()
+# AbbreviationLCS([],[],5,3)
 
-print(time.time()-t)
+print(time.time() - t)
